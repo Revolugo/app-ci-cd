@@ -6,9 +6,6 @@ gcloud auth activate-service-account --key-file ~/.gcloud-api-key.json
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-echo '==========================='
-echo $DIR
-echo '==========================='
 IMAGE_REGISTRY_URL=$( sh $DIR/docker.sh GET_REGISTRY_URL )
 
 docker login -u _json_key --password-stdin $IMAGE_REGISTRY_URL < ~/.gcloud-api-key.json
