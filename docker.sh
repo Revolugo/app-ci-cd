@@ -43,7 +43,7 @@ case ${ACTION} in
 "PUSH")
    docker push ${DOCKER_REGISTRY}:${TAG}
 
-   sh ./bin/slack.sh "🆕 New Image Pushed to: ${DOCKER_REGISTRY}:${TAG}"
+   sh slack.sh "🆕 New Image Pushed to: ${DOCKER_REGISTRY}:${TAG}"
    ;;
 "RUN")
    docker run ${DOCKER_REGISTRY}:${TAG}
