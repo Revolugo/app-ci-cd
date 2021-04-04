@@ -41,9 +41,7 @@ case ${ACTION} in
    echo "https://${DOCKER_REGISTRY}"
    ;;
 "PUSH")
-   docker push ${DOCKER_REGISTRY}:${TAG}
-
-   DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+   echo ${docker push ${DOCKER_REGISTRY}:${TAG}}
    
    sh ./app-ci-cd/slack.sh "🆕 New Image Pushed to: ${DOCKER_REGISTRY}:${TAG}"
    ;;
