@@ -33,7 +33,7 @@ ACTION="${1}"
 
 case ${ACTION} in
 "BUILD")
-   DOCKER_BUILDKIT=1 docker build -t ${DOCKER_REGISTRY}:${TAG} --target production .
+   docker build -t ${DOCKER_REGISTRY}:${TAG} --target production .
 
    echo "${DOCKER_REGISTRY}:${TAG}"
    ;;
