@@ -18,6 +18,6 @@ done
 
 shift $((OPTIND-1))
 
-sh ./app-ci-cd/docker.sh ${OPTION} BUILD
+sh -x ./app-ci-cd/docker.sh ${OPTION} BUILD
 
-sh ./app-ci-cd/docker.sh ${OPTION} PUSH
+sh -x ./app-ci-cd/docker.sh ${OPTION} PUSH
