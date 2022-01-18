@@ -1,8 +1,5 @@
 require "base64"
 
-content = File.read('Input.txt')
-content.gsub!('\\r', "\r")
-content.gsub!('\\n', "\n")
 decode_base64_content = Base64.decode64(ENV["GCLOUD_API_KEYFILE"])
 puts '==================================='
 puts decode_base64_content
