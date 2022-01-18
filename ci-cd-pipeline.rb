@@ -2,7 +2,7 @@ require "base64"
 
 GCLOUD_API_KEYFILE = Base64.decode64(ENV["GCLOUD_API_KEYFILE"])
 
-File.open("~/.gcloud-api-key.json", "w+") do |f|
+File.open("~/.gcloud-api-key.json", "w") do |f|
   f.write(GCLOUD_API_KEYFILE)
 end
 
