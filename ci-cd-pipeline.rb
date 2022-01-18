@@ -7,7 +7,7 @@ File.open("/root/.gcloud-api-key.json", "w+") do |f|
   f.write(GCLOUD_API_KEYFILE)
 end
 
-IMAGE_REGISTRY_URL = `sh ./app-ci-cd/docker.sh GET_REGISTRY_URL`
+IMAGE_REGISTRY_URL = `sh docker.sh GET_REGISTRY_URL`
 
 puts IMAGE_REGISTRY_URL
 
