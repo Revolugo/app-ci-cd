@@ -36,6 +36,8 @@ end
 
 if @options[:fetch_parameter_store] == 'true'
    puts get_parameters
+else
+   puts 'okokoko'
 end
    # @options = {}
 
