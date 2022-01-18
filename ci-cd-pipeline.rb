@@ -3,11 +3,11 @@ require 'optparse'
 
 @client = Aws::SSM::Client.new
 
-options[:app_name] = 'dashboard'
-options[:environment] = 'staging'
+app_name = 'dashboard'
+environment = 'staging'
 
 def get_parameters(parameters = [], next_token)
-   path = "/#{options[:environment]}/#{options[:app_name]}"
+   path = "/#{environment}/#{app_name}"
  
    res = @client.get_parameters_by_path({
      path: path,
