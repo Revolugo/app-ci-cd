@@ -11,6 +11,6 @@ File.open("~/.gcloud-api-key.json", "wb") do |f|
   f.write(decode_base64_content)
 end
 
-IMAGE_REGISTRY_URL=$( sh ./app-ci-cd/docker.sh GET_REGISTRY_URL )
+IMAGE_REGISTRY_URL = `sh ./app-ci-cd/docker.sh GET_REGISTRY_URL`
 
 puts IMAGE_REGISTRY_URL
