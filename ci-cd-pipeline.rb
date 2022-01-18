@@ -1,11 +1,9 @@
 require "base64"
 
-decode_base64_content = Base64.decode64(ENV["GCLOUD_API_KEYFILE"])
-puts '==================================='
-puts decode_base64_content
-puts '==================================='
-File.open("~/.gcloud-api-key.json", "wb") do |f|
-  f.write(decode_base64_content)
+GCLOUD_API_KEYFILE = Base64.decode64(ENV["GCLOUD_API_KEYFILE"])
+
+File.open("~/.gcloud-api-key.json", "w+") do |f|
+  f.write(GCLOUD_API_KEYFILE)
 end
 
 IMAGE_REGISTRY_URL = `sh ./app-ci-cd/docker.sh GET_REGISTRY_URL`
