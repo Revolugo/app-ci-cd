@@ -34,6 +34,8 @@ def get_parameters(parameters = [], next_token = nil)
    get_parameters(parameters, res[:next_token])
 end
 
+puts @options[:fetch_parameter_store]
+
 if @options[:fetch_parameter_store] == 'true'
    puts get_parameters
 else
