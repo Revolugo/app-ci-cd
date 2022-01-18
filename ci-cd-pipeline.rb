@@ -6,7 +6,7 @@ require 'optparse'
 app_name = 'dashboard'
 environment = 'staging'
 
-def get_parameters(parameters = [], next_token)
+def get_parameters(parameters = [], next_token = nil)
    path = "/#{environment}/#{app_name}"
  
    res = @client.get_parameters_by_path({
