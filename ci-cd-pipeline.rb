@@ -1,15 +1,29 @@
-require "base64"
-require "tty-command"
+require 'aws-sdk'
+require 'optparse'
 
-GCLOUD_API_KEYFILE = Base64.decode64(ENV["GCLOUD_API_KEYFILE"])
+@client = Aws::SSM::Client.new
 
-File.open("/root/.gcloud-api-key.json", "w+") do |f|
-  f.write(GCLOUD_API_KEYFILE)
+options[:app_name] = 'dashboard'
+options[:environment] = 'staging'
+
+def get_parameters(parameters = [], next_token)
+   path = "/#{options[:environment]}/#{options[:app_name]}"
+ 
+   res = @client.get_parameters_by_path({
+     path: path,
+     recursive: true,
+     next_token: next_token
+   })
+ 
+   parameters.concat res[:parameters]
+ 
+   return parameters unless res[:next_token]
+ 
+   get_parameters(parameters, res[:next_token])
 end
 
-IMAGE_REGISTRY_URL = `sh ./app-ci-cd/docker.sh GET_REGISTRY_URL`
+puts get_parameters
+# @options = {}
 
-puts IMAGE_REGISTRY_URL
-
-cmd = TTY::Command.new
-cmd.run("docker login -u _json_key --password-stdin #{IMAGE_REGISTRY_URL} < /root/.gcloud-api-key.json")
+# OptionParser.new do |opts|
+# end

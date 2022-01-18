@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem "tty-command"
+gem 'aws-sdk', '~> 3'
