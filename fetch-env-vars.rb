@@ -34,10 +34,8 @@ def get_parameters(parameters = [], next_token = nil)
    get_parameters(parameters, res[:next_token])
 end
 
-puts get_parameters
+env_vars = get_parameters.map do |val|
+   "#{val['name'].split('/')[3]}=#{val['value']}"
+end
 
-puts Dir.pwd
-   # @options = {}
-
-# OptionParser.new do |opts|
-# end
+File.write("../.env", env_vars.join("\n"), mode: "a")
