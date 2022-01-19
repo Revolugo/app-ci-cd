@@ -1,5 +1,5 @@
-Bundler.require 'aws-sdk'
-Bundler.require 'optparse'
+require 'bundler/aws-sdk'
+require 'bundler/optparse'
 
 @client = Aws::SSM::Client.new
 
