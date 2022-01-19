@@ -5,18 +5,8 @@ require 'optparse'
 
 @options = {}
 
-@app_name = 'dashboard'
-@environment = 'staging'
-
-OptionParser.new do |opts|
-   opts.on("-t TAG", "--tag TAG", "Image Tag") do |val|
-      @options[:image_tag] = val
-   end
-
-   opts.on("--fetch-parameter-store PARAMETER_STORE", "Fetch parameter store for env vars") do |val|
-      @options[:fetch_parameter_store] = val
-   end
- end.parse!
+@app_name = ARGV[0]
+@environment = ARGV[1]
 
 def get_parameters(parameters = [], next_token = nil)
    path = "/#{@environment}/#{@app_name}"
@@ -38,4 +28,8 @@ env_vars = get_parameters.map do |val|
    "#{val['name'].split('/')[3]}=#{val['value']}"
 end
 
-File.write("../.env", env_vars.join("\n"), mode: "a")
+if env_vars.empty?
+   puts "⚠️  No env vars found for app: #{@app_name} on environment: #{@environment}" 
+end
+
+File.write("../.env", env_vars.join("\n"), mode: "w")
