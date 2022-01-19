@@ -27,13 +27,18 @@ while getopts ":t:" o; do
    esac
 done
 
-shift $((OPTIND-1))
+shift $((OPTIND - 1))
 
 ACTION="${1}"
 
 case ${ACTION} in
 "BUILD")
-   docker build -t ${DOCKER_REGISTRY}:${TAG} --target production .
+   docker build --memory=3g --memory-swap=1g -t $(cat package.json |
+      grep docker-registry |
+      head -1 |
+      awk -F: '{ print $2 }' |
+      sed 's/[",]//g' |
+      tr -d '[[:space:]]'):${TAG} --target production .
 
    echo "${DOCKER_REGISTRY}:${TAG}"
    ;;
@@ -42,7 +47,7 @@ case ${ACTION} in
    ;;
 "PUSH")
    docker push ${DOCKER_REGISTRY}:${TAG}
-   
+
    sh ./app-ci-cd/slack.sh "🆕 New Image Pushed to: ${DOCKER_REGISTRY}:${TAG}"
    ;;
 "RUN")
