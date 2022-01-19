@@ -13,7 +13,7 @@ OptionParser.new do |opts|
       @options[:image_tag] = val
    end
 
-   opts.on("-fps PARAMETER_STORE", "--fetch-parameter-store PARAMETER_STORE", "Fetch parameter store for env vars") do |val|
+   opts.on("--fetch-parameter-store PARAMETER_STORE", "Fetch parameter store for env vars") do |val|
       @options[:fetch_parameter_store] = val
    end
  end.parse!
@@ -38,9 +38,9 @@ puts @options[:fetch_parameter_store]
 
 if @options[:fetch_parameter_store] == 'true'
    puts get_parameters
-else
-   puts 'okokoko'
 end
+
+puts Dir.pwd
    # @options = {}
 
 # OptionParser.new do |opts|
