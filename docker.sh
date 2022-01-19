@@ -33,7 +33,7 @@ ACTION="${1}"
 
 case ${ACTION} in
 "BUILD")
-   docker build --memory=4g --memory-swap=4g -t $(cat package.json |
+   docker build --memory=5g --memory-swap=5g -t $(cat package.json |
       grep docker-registry |
       head -1 |
       awk -F: '{ print $2 }' |
