@@ -19,10 +19,15 @@ PACKAGE_VERSION=$(get_package_attr 'version')
 
 TAG="v${PACKAGE_VERSION}"
 
-while getopts ":t:" o; do
+TARGET="production"
+
+while getopts ":t:b:" o; do
    case "${o}" in
    t)
       TAG=${OPTARG}
+      ;;
+   b)
+      TARGET=${OPTARG}
       ;;
    esac
 done
@@ -38,7 +43,7 @@ case ${ACTION} in
       head -1 |
       awk -F: '{ print $2 }' |
       sed 's/[",]//g' |
-      tr -d '[[:space:]]'):${TAG} --target production .
+      tr -d '[[:space:]]'):${TAG} --target ${TARGET} .
 
    echo "${DOCKER_REGISTRY}:${TAG}"
    ;;
